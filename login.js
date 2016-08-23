@@ -1,25 +1,27 @@
-$(document).ready(function(){
-$("#submit").click(function(){
+$(function() {
+        $("#submit").on("click", function(){
+            uname = $("#username").val();
+            pword = $("#password").val();
+            if( uname == "" || pword == ""){
+                alert("Please enter both username and password");
+            } else {
+                $.post( $("#loginform").attr("action"), { username: uname, password: pword},
+                        function(data) {
+                            if( data == 'Incorrect Username/Password'){
+                                $("form")[0].reset();
+                                alert(data);
+                            } else if( data == 'Login Successful'){
+                                $("form")[0].reset();
+                                alert(data);
+                            } else{
+                                alert(data);
+                            }
+                });
+            $("#loginform").submit( function(){
+            return false;
+            });
+            }
+    });
+    });
 
-if( $("#username").val() === '' || $("#password").val() === ''){
-    //$('input[type="text"],input[type="password"]').css("border","2px solid red");
-    //$('input[type="text"],input[type="password"]').css("box-shadow","0 0 3px red");
-    //alert("Please fill all fields...!!!!!!");
-    $("div#react").html("Please enter both username and password");
-} else {
-    $.post("login.php", { email: email, password:password},
-            function(data) {
-                if( data == 'Incorrect Username/Password'){
-                    $('input[type="text"],input[type="password"]').css({"border":"2px solid red","box-shadow":"0 0 3px red"});
-                    alert(data);
-                } else if( data == 'Login Successful'){
-                    $("form")[0].reset();
-                    $('input[type="text"],input[type="password"]').css({"border":"2px solid #00F5FF","box-shadow":"0 0 5px #00F5FF"});
-                    alert(data);
-                } else{
-                    alert(data);
-}
-});
-}
-});
-});
+

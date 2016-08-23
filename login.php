@@ -1,13 +1,19 @@
 <?php
 
-$username = json_encode($_POST["username"]);
-$password = json_encode($_POST["password"]);
+$username = $_POST["username"];
+$password = $_POST["password"];
 
-if ($username != "hr@auphansoftware.com" || $password != "hello") {
-	echo "Incorrect Username/Password";
-} else {
-	echo "Login Successful";
+if( empty($username) || empty($password) ) {
+	header("Refresh:0; url= index.html");
+} else
 
-}
+	if ($username == "hr@auphansoftware.com" && $password == "hello") {
+		echo "Login Successful";
+	} else {
+		echo "Incorrect Username/Password";
+
+	}
+
 exit;
 ?>
+
